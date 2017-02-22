@@ -43,8 +43,21 @@ namespace ImageCrop.Controllers
             public string nameimg { get; set; }
         }
 
+        /// <summary>
+        /// С   
+        /// </summary>
+        /// <returns></returns>
+        public class Cordinats2
+        {
+            public int X { get; set; }
+            public int Y { get; set; }
+            public int W { get; set; }
+            public int H { get; set; }
+            public HttpPostedFileBase file { get; set; }
+        }
+
         [HttpPost]
-        public JsonResult Upload()
+        public JsonResult Upload(Cordinats2 model)
         {
             if (Request.Files == null)
             {

@@ -15,6 +15,8 @@
 @section scripts{
     <script type="text/javascript">
         var nameimg;
+        var jcrop_api;
+        var files;
         $(document).ready(function () {
 
             var fileInput = $('#uploadFile');
@@ -25,6 +27,8 @@
                     displayFiles(this.files);
                     $('#cropbox').Jcrop({
                         onSelect: updateCoords
+                    },function(){
+                        jcrop_api = this;
                     });
                 }
             });
@@ -47,11 +51,15 @@
                     })(img);
                     // Чтение данных из объекта file
                     reader.readAsDataURL(file);
-                    var files = document.getElementById('uploadFile').files;
+                    files = document.getElementById('uploadFile').files;
                     if (files.length > 0) {
                         if (window.FormData !== undefined) {
                             var formData = new FormData(); 
-                                formData.append("file" , files[0]);
+                            formData.append("file", files[0]);
+                            formData.append("X", 12);
+                            formData.append("Y", 25);
+                            formData.append("H", 5);
+                            formData.append("W", 45);
                             $.ajax({
                                 type: "POST", 
                                 url: '/Home/Upload',
@@ -87,28 +95,28 @@
         };
 
         function cropImage() {
-
-            var Cord = {
-                'CorX': $("#X").val(),
-                'CorY': $("#Y").val(),
-                'CorW': $("#W").val(),
-                'CorH': $("#H").val(),
-                nameimg
-            }
-            $.ajax({
-                type: "POST",
-                url: '/Home/Crop',
-                contentType: "application/json; charset=utf-8",
-                processData: false,
-                data: JSON.stringify(Cord),
-                success: function (result) {
-                    alert(result);
-                    location.reload();
-                },
-                error: function (xhr) {
-                    console.log(xhr.responseText);
-                }
-            });
+            console.log('tellSelect', jcrop_api.tellSelect());
+            //var Cord = {
+            //    'CorX': $("#X").val(),
+            //    'CorY': $("#Y").val(),
+            //    'CorW': $("#W").val(),
+            //    'CorH': $("#H").val(),
+            //    nameimg
+            //}
+            //$.ajax({
+            //    type: "POST",
+            //    url: '/Home/Crop',
+            //    contentType: "application/json; charset=utf-8",
+            //    processData: false,
+            //    data: JSON.stringify(Cord),
+            //    success: function (result) {
+            //        alert(result);
+            //        location.reload();
+            //    },
+            //    error: function (xhr) {
+            //        console.log(xhr.responseText);
+            //    }
+            //});
 
 
 
