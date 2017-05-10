@@ -21,12 +21,10 @@ namespace ImageCrop
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
-                      "~/JsLibraries/Jcrop-v0.9.12/js/jquery.Jcrop.js",
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/JsLibraries/Jcrop-v0.9.12/css/jquery.Jcrop.css",
+
                       "~/Content/site.css"));
         }
     }
