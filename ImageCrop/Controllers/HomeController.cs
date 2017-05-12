@@ -16,5 +16,30 @@ namespace ImageCrop.Controllers
         {
             return View();
         }
+        public ActionResult ImageCrop()
+        {
+            return View();
+        }
+
+        public ActionResult Test()
+        {
+            return View();
+        }
+        /// <summary>
+        /// Путь для изображения
+        /// </summary>
+        const string PathCrop = "~/Scripts/Components/CropImage/Img/";
+        /// <summary>
+        /// Обрезка Изображения
+        /// </summary>
+        /// <param name="Crop"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public JsonResult Crop(CropModel Crop)
+        {
+            string map = Server.MapPath(PathCrop);
+            CropImage.Trimming(Crop, map);
+            return Json("Успешно сохранена");
+        }
     }
 }
